@@ -1,6 +1,13 @@
 :root {
     --type-first: Helvetica, Arial, sans-serif;
     --type-second: 'Spectral', Georgia;
+
+    --green: #329f5c;
+    --light-green: #8FD5A6;
+    --dark-green: #0D5D56;
+
+    --black: #171A21;
+    --white: #F5F2F8;
 }
 
 * {
@@ -9,8 +16,10 @@
 
 body {
     margin: 0;
-    color: #333;
+    color: var(--black);
     font-family: var(--type-first);   
+    padding-top: 4rem;
+    background-color: var(--white);
 }
 
 ul, li {
@@ -28,7 +37,11 @@ button, input {
     display: block;
     font-size: 1rem;
     font-family: var(--type-first);
-    color: #333;
+    color: var(--black);
+}
+
+a {
+    text-decoration: none;
 }
 
 .container {
