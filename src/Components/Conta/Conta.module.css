@@ -1,0 +1,13 @@
+.info {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.infoLabel {
+    font-family: var(--type-second);
+    color: #777;
+}
+
+.infoValue {
+    font-size: 1.2rem;
+}

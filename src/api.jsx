@@ -11,3 +11,16 @@ export function STATUS_GET(apiKey) {
         }
     }
 }
+
+export function CONTRIES_GET() {
+    return {
+        url: API_URL + "contries",
+        options: {
+            method: "GET",
+            headers: {
+                "x-rapidapi-host": "v3.football.api-sports.io",
+		        "x-rapidapi-key": "",
+            }
+        }
+    }
+}
