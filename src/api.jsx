@@ -12,14 +12,14 @@ export function STATUS_GET(apiKey) {
     }
 }
 
-export function CONTRIES_GET() {
+export function COUNTRIES_GET({search = ""}) {
     return {
-        url: API_URL + "contries",
+        url: API_URL + `countries?${search ? `search=${search}` : ""}`,
         options: {
             method: "GET",
             headers: {
                 "x-rapidapi-host": "v3.football.api-sports.io",
-		        "x-rapidapi-key": "",
+		        "x-rapidapi-key": "d06ebb50e8af268e74f1b7f62cb6e8bf",
             }
         }
     }

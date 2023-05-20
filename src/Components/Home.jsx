@@ -1,10 +1,11 @@
 import React from "react";
+import Countries from "./Contries/Countries";
 
 const Home = () => {
     return (
-        <div>
-            Home
-        </div>
+        <section className="container mainContainer">
+            <Countries/>
+        </section>
     );
 }
 

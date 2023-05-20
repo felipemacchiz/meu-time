@@ -7,7 +7,7 @@ const Conta = () => {
     const {data, userLogout} = React.useContext(UserContext);
 
     return (
-        <section className="container animeLeft">
+        <section className="container mainContainer animeLeft">
             <div className={styles.info}>
                 <p className={styles.infoLabel}>Nome</p>
                 <p className={styles.infoValue}>{data.firstname} {data.lastname}</p>
