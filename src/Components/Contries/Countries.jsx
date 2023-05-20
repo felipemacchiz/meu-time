@@ -6,8 +6,10 @@ import Error from "../Helper/Error";
 import Loading from "../Helper/Loading";
 import styles from "./Countries.module.css";
 import { COUNTRIES_GET } from "../../api";
+import { UserContext } from "../../UserContext";
 
 const Countries = () => {
+    const {apiKey} = React.useContext(UserContext);
     const {data, loading, error, request} = useFetch();
     const [search, setSearch] = React.useState("");
 
@@ -16,7 +18,7 @@ const Countries = () => {
     }
 
     async function fetchCountries() {
-        const { url, options } = COUNTRIES_GET({search});
+        const { url, options } = COUNTRIES_GET(apiKey, {search});
         const { response, json } = await request(url, options);
     }
 
@@ -32,7 +34,7 @@ const Countries = () => {
 
     return (
         <div>
-            
+
             <div>
                 <Input 
                     name="searchCountry" 

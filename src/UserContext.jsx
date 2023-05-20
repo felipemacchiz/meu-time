@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const UserContext = React.createContext();
 
 export const UserStorage = ({ children }) => {
+    const [apiKey, setApiKey] = React.useState("");
     const [data, setData] = React.useState(null); 
     const [login, setLogin] = React.useState(null);
     const [loading, setLoading] = React.useState(false);
@@ -22,12 +23,12 @@ export const UserStorage = ({ children }) => {
         navigate("/login");
     }, [navigate]);
 
-    async function getUser(apiKey) {
+    async function getUser(key) {
         try {
             setError(null);
             setLoading(true);
 
-            const {url, options} = STATUS_GET(apiKey);
+            const {url, options} = STATUS_GET(key);
 
             const response = await fetch(url, options);
             const json = await response.json();
@@ -36,6 +37,7 @@ export const UserStorage = ({ children }) => {
                 throw new Error("Chave inválida");
             }
 
+            setApiKey(key);
             setData(json.response.account);
             setLogin(true);
         } catch(e) {
@@ -45,19 +47,20 @@ export const UserStorage = ({ children }) => {
         }
     }
 
-    async function userLogin(apiKey) {
+    async function userLogin(key) {
         try {
             setError(null);
             setLoading(true);
 
-            const {url, options} = STATUS_GET(apiKey);
+            const {url, options} = STATUS_GET(key);
 
             const response = await fetch(url, options);
             const json = await response.json();
 
             if (json.results) {
-                localStorage.setItem("apiKey", apiKey);
-                getUser(apiKey);
+                localStorage.setItem("apiKey", key);
+                
+                getUser(key);
 
                 navigate("/");
             } else {
@@ -73,11 +76,12 @@ export const UserStorage = ({ children }) => {
     
     React.useEffect(() => {
         async function autoLogin() {
-            const apiKey = window.localStorage.getItem("apiKey");
+            const key = window.localStorage.getItem("apiKey");
 
-            if (apiKey) {
+            if (key) {
                 getUser(apiKey);
             } else {
+                setApiKey("");
                 userLogout();
             }
         }
@@ -86,7 +90,7 @@ export const UserStorage = ({ children }) => {
     }, [userLogout]);
 
     return (
-        <UserContext.Provider value={{ userLogin, userLogout, data, error, loading, login }}>
+        <UserContext.Provider value={{ userLogin, userLogout, apiKey, data, error, loading, login }}>
             {children}
         </UserContext.Provider>
     );
