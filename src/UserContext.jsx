@@ -79,7 +79,8 @@ export const UserStorage = ({ children }) => {
             const key = window.localStorage.getItem("apiKey");
 
             if (key) {
-                getUser(apiKey);
+                getUser(key);
+                setApiKey(key);
             } else {
                 setApiKey("");
                 userLogout();

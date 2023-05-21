@@ -14,7 +14,7 @@ const App = () => {
       <>
         <BrowserRouter>
           <UserStorage>
-            <Header />
+            <Header/>
             <Routes>
               <Route path="/" element={<Home/>} />
               <Route path="login/*" element={<Login/>} />
@@ -27,7 +27,7 @@ const App = () => {
                 } 
               />
             </Routes>
-            <Footer />
+            <Footer/>
           </UserStorage>
         </BrowserRouter>
       </>

@@ -7,6 +7,7 @@ import Loading from "../Helper/Loading";
 import styles from "./Countries.module.css";
 import { COUNTRIES_GET } from "../../api";
 import { UserContext } from "../../UserContext";
+import { Navigate } from "react-router-dom";
 
 const Countries = () => {
     const {apiKey} = React.useContext(UserContext);
@@ -18,13 +19,11 @@ const Countries = () => {
     }
 
     async function fetchCountries() {
-        const { url, options } = COUNTRIES_GET(apiKey, {search});
+        const { url, options } = COUNTRIES_GET(apiKey, search);
         const { response, json } = await request(url, options);
     }
 
     React.useEffect(() => {
-        
-
         fetchCountries();
     }, [request]);
 
@@ -43,9 +42,11 @@ const Countries = () => {
                     value={search}
                     onChange={({target}) => setSearch(target.value)}
                     onBlur={searchContries}
+                    autoComplete="off"
                 />
             </div>
-            {data ? (
+            {loading && <Loading/>}
+            {!loading && data ? (
                 <ul className={styles.countriesGrid}>
                     {data?.response?.map((country, countryIndex) => <CountryItem key={`country${countryIndex}`} {...country}/>)}
                 </ul>

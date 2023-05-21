@@ -1,25 +1,15 @@
-.countryItem {
+.countryHeader {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
     width: 100%;
     column-gap: 1rem;
-    background: #fff;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 0.3rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: 0.3s;
 }
 
-.countryItem img {
-    border-radius: 0.3rem 0.3rem 0 0;
-}
-
-.countryItem p {
+.countryContent p {
     padding: 1rem 0;
-}
-
-.countryItem:hover {
-    background-color: var(--light-green);
-    transform: scale(1.01);
 }
