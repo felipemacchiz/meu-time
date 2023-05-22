@@ -7,7 +7,6 @@ import Loading from "../Helper/Loading";
 import styles from "./Countries.module.css";
 import { COUNTRIES_GET } from "../../api";
 import { UserContext } from "../../UserContext";
-import { Navigate } from "react-router-dom";
 
 const Countries = () => {
     const {apiKey} = React.useContext(UserContext);
@@ -25,7 +24,7 @@ const Countries = () => {
 
     React.useEffect(() => {
         fetchCountries();
-    }, [request]);
+    }, [apiKey, request]);
 
     if (error) {
         return <Error/>

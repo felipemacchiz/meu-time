@@ -13,28 +13,24 @@ const CountryItem = ({name, code}) => {
 
     async function fetchLeagues() {
         const { url, options } = LEAGUES_GET(apiKey, code);
+        console.log(options);
         const { response, json } = await request(url, options);
+        console.log(data);
     }
 
-    function handleClick() {
-        setActive(!active);
-    }
-
-    React.useCallback(() => {
-        if (active) {
-            fetchLeagues();
-        }
+    React.useEffect(() => {
+        fetchLeagues();
     }, [active]);
 
     return (
         <li>
-            <div className={styles.countryHeader} onClick={handleClick}>
+            <div className={styles.countryHeader} onClick={() => setActive(!active)}>
                 <p>{name}</p>
                 {!active ? <BiChevronDown/> : <BiChevronUp/>}
             </div>
             {active && (
                 <div className={styles.countryContent}>
-                    {!loading && data && data.response && data.response.map(({league, seasons}) => <League league={league} seasons={seasons} />)}
+                    {!loading && data && data.response && data.response.map(({league, seasons}, index) => <League key={`league${index}`} league={league} seasons={seasons} />)}
                 </div>
             )}
         </li>

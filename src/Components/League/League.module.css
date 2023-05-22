@@ -1,0 +1,10 @@
+.league {
+    margin-top: 1rem;
+}
+
+.seasonsGrid {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+}

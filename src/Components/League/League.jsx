@@ -1,16 +1,17 @@
 import React from "react";
 import Button from "../Forms/Button";
 import { Link } from "react-router-dom";
+import styles from "./League.module.css";
 
 const League = ({league, seasons}) => {
     return (
-        <div>
+        <div className={styles.league}>
             <h1>{league.name}</h1>
             <div>
                 <p>Temporadas</p>
-                <div>
+                <div className={styles.seasonsGrid}>
                     {seasons.map((season) => (
-                        <Link to="/season/?">
+                        <Link key={`season${season.year}`} to="/season/?">
                             <Button>{season.year}</Button>
                         </Link>
                     ))}
