@@ -3,7 +3,7 @@ import Button from "../Forms/Button";
 import { Link } from "react-router-dom";
 import styles from "./League.module.css";
 
-const League = ({league, seasons}) => {
+const League = ({country, league, seasons}) => {
     return (
         <div className={styles.league}>
             <h1>{league.name}</h1>
@@ -11,7 +11,7 @@ const League = ({league, seasons}) => {
                 <p>Temporadas</p>
                 <div className={styles.seasonsGrid}>
                     {seasons.map((season) => (
-                        <Link key={`season${season.year}`} to="/season/?">
+                        <Link key={`season${season.year}`} to={`/liga/${league.id}/${season.year}`}>
                             <Button>{season.year}</Button>
                         </Link>
                     ))}

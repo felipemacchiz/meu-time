@@ -25,9 +25,22 @@ export function COUNTRIES_GET(apiKey, search = "") {
     }
 }
 
-export function LEAGUES_GET(apiKey, code = "") {
+export function LEAGUES_GET(apiKey, id = 0, code = "") {
     return {
-        url: API_URL + `leagues?${code ? `code=${code}` : ""}`,
+        url: API_URL + `leagues?${id ? `id=${id}` : (code ? `code=${code}` : "")}`,
+        options: {
+            method: "GET",
+            headers: {
+                "x-rapidapi-host": "v3.football.api-sports.io",
+		        "x-rapidapi-key": apiKey,
+            }
+        }
+    }
+}
+
+export function TEAMS_GET(apiKey, league, season) {
+    return {
+        url: API_URL + `teams?league=${league}&season=${season}`,
         options: {
             method: "GET",
             headers: {

@@ -5,6 +5,7 @@ import useFetch from "../../Hooks/useFetch";
 import { LEAGUES_GET } from "../../api";
 import { UserContext } from "../../UserContext";
 import League from "../League/League";
+import Loading from "../Helper/Loading";
 
 const CountryItem = ({name, code}) => {
     const {apiKey} = React.useContext(UserContext);
@@ -12,15 +13,19 @@ const CountryItem = ({name, code}) => {
     const {data, loading, error, request} = useFetch();
 
     async function fetchLeagues() {
-        const { url, options } = LEAGUES_GET(apiKey, code);
-        console.log(options);
+        const { url, options } = LEAGUES_GET(apiKey, 0, code);
         const { response, json } = await request(url, options);
-        console.log(data);
     }
 
     React.useEffect(() => {
-        fetchLeagues();
-    }, [active]);
+        if (active) {
+            fetchLeagues();
+        }
+    }, [request, active]);
+
+    if (loading) {
+        return <Loading/>;
+    }
 
     return (
         <li>
@@ -30,7 +35,7 @@ const CountryItem = ({name, code}) => {
             </div>
             {active && (
                 <div className={styles.countryContent}>
-                    {!loading && data && data.response && data.response.map(({league, seasons}, index) => <League key={`league${index}`} league={league} seasons={seasons} />)}
+                    {!loading && data && data.response && data.response.map(({country, league, seasons}, index) => <League key={`league${index}`} country={country} league={league} seasons={seasons} />)}
                 </div>
             )}
         </li>

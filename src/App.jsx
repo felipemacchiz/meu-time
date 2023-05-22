@@ -7,6 +7,7 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Login from './Components/Login/Login';
 import Conta from './Components/Conta/Conta';
+import Season from './Components/Season/Season';
 import ProtectedRoute from './Components/Helper/ProtectedRoute';
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
                   </ProtectedRoute>
                 } 
               />
+              <Route path="liga/:league/:season/*" element={<Season/>}/>
             </Routes>
             <Footer/>
           </UserStorage>
